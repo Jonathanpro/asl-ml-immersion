@@ -4,6 +4,9 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
+
+class Config:
+    """Sets configuration vars."""
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
@@ -16,9 +19,6 @@
 
 import os
 
-
-class Config:
-    """Sets configuration vars."""
 
     PROJECT_ID = os.getenv("PROJECT_ID")
     REGION = os.getenv("REGION", "us-central1")
@@ -39,6 +39,7 @@ class Config:
         f"--temp_location={os.path.join(PIPELINE_ROOT, 'beam')}",
         f"--region={REGION}",
         "--runner=DataflowRunner",
+        "--experiments=use_runner_v2",
     ]
 
     ENABLE_CACHE = bool(os.getenv("ENABLE_CACHE", "False"))
